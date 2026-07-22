@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DETAILS - erebos</title>
+<link rel="icon" type="image/png" href="https://cx051.github.io/assets/favicon.png">
+<meta name="description" content="DETAILS section - erebos / cx051 portfolio">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#eef0ec;
+    --panel:#ffffff;
+    --ink:#15181a;
+    --ink-soft:#54595c;
+    --ink-faint:#8d9390;
+    --line:#d6d9d2;
+    --accent:#22564d;
+    --accent-soft:#dbe8e3;
+    --mark:#f4c04d;
+    --radius:14px;
+  }
+
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Inter", sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{ color:inherit; }
+  .wrap{ max-width:1140px; margin:0 auto; padding:0 32px; }
+
+  /* ---------- nav ---------- */
+  header{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:26px 0;
+  }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:"Sora",sans-serif; font-weight:600; font-size:15px; }
+  .brand-dot{
+    width:32px; height:32px; border-radius:50%; background:var(--ink);
+    color:var(--bg); display:flex; align-items:center; justify-content:center;
+    font-family:"JetBrains Mono",monospace; font-size:13px; font-weight:600;
+  }
+  nav{ display:flex; align-items:center; gap:34px; }
+  nav a{
+    text-decoration:none; color:var(--ink-soft); font-size:14.5px; font-weight:500;
+    position:relative; padding-bottom:4px; transition:color .2s ease, transform .15s ease;
+  }
+  nav a:hover{ color:var(--ink); transform:translateY(-1px); }
+  nav a.active{ color:var(--ink); font-weight:600; }
+  nav a.active::after{
+    content:""; position:absolute; left:0; right:0; bottom:0; height:2px; background:var(--ink);
+    animation:underlineGrow .3s ease forwards;
+  }
+  @keyframes underlineGrow{ from{transform:scaleX(0);} to{transform:scaleX(1);} }
+  .nav-right{ display:flex; align-items:center; gap:16px; }
+  .btn-dark{
+    background:var(--ink); color:var(--bg); border:none; border-radius:30px;
+    padding:12px 22px; font-family:"Inter",sans-serif; font-weight:600; font-size:14px;
+    cursor:pointer; text-decoration:none; display:inline-block; transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .btn-dark:hover{ transform:translateY(-2px); box-shadow:0 8px 16px -8px rgba(0,0,0,.3); }
+  .btn-dark:active{ transform:translateY(1px) scale(0.97); box-shadow:0 2px 8px -6px rgba(0,0,0,.4); }
+  @media (max-width:860px){ nav{ display:none; } }
+
+  /* ---------- section shell ---------- */
+  section{ padding:64px 0; border-top:1px solid var(--line); }
+  .section-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:36px; }
+  .section-head .idx{ font-family:"JetBrains Mono",monospace; font-size:12px; color:var(--accent); }
+  .section-head h2{ font-family:"Sora",sans-serif; font-size:30px; font-weight:700; margin:0; }
+  .section-head p{ color:var(--ink-soft); font-size:14.5px; margin:0 0 0 auto; max-width:32ch; text-align:right; }
+  @media (max-width:700px){ .section-head p{ display:none; } }
+
+  /* ---------- hero for details ---------- */
+  .details-hero{
+    padding:44px 0 50px;
+  }
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace; font-size:12.5px; letter-spacing:.08em;
+    text-transform:uppercase; color:var(--accent); display:flex; align-items:center; gap:9px;
+    margin:0 0 18px;
+  }
+  .eyebrow::before{ content:""; width:22px; height:2px; background:var(--accent); display:inline-block; }
+  h1{
+    font-family:"Sora",sans-serif; font-weight:800; font-size:clamp(46px,6vw,74px);
+    line-height:0.98; letter-spacing:-0.02em; margin:0 0 10px;
+  }
+  .lede{ max-width:56ch; font-size:16.5px; line-height:1.7; color:var(--ink-soft); margin:0 0 30px; }
+
+  /* ---------- photo block for details ---------- */
+  .photo-block{
+    display:flex; align-items:flex-start; gap:32px; flex-wrap:wrap;
+  }
+  .bio-col{ flex:1; min-width:240px; }
+  
+  /* polaroid style photo */
+  .polaroid{
+    flex-shrink:0;
+    width:180px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    padding:10px 10px 26px;
+    border-radius:var(--radius);
+    transform:rotate(-3deg);
+    box-shadow:0 20px 40px -18px rgba(0,0,0,.35);
+    position:relative;
+  }
+  .polaroid img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    display:block;
+    border-radius:calc(var(--radius) - 4px);
+  }
+  .polaroid .caption{
+    margin-top:10px;
+    text-align:center;
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;
+    letter-spacing:.06em;
+    text-transform:uppercase;
+    color:var(--ink-faint);
+  }
+
+  /* ---------- status cards ---------- */
+  .status-cards{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+    align-items:flex-start;
+    margin-top:20px;
+  }
+  .discord-card{
+    min-width:320px;
+  }
+  .discord-card img{
+    max-width:100%;
+    height:auto;
+    border-radius:var(--radius);
+  }
+
+  /* now-playing card styles */
+  .now-playing-card {
+    max-width: 420px;
+    min-width: 320px;
+    width: 100%;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .now-playing-card:hover{
+    transform:translateY(-3px);
+    box-shadow:0 12px 24px -10px rgba(0,0,0,.15);
+  }
+  .now-playing-card img {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+  .now-playing-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+    font-size: 12px;
+    color: #888;
+  }
+  .now-playing-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #22c55e;
+    flex-shrink: 0;
+  }
+  .now-playing-dot.paused {
+    background: #999;
+  }
+  .now-playing-title {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--ink);
+  }
+  .now-playing-artist {
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 2px 0 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* ---------- vitals grid (PC specs) ---------- */
+  .vitals-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap:28px 40px;
+  }
+  .vital{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .vital-name{
+    font-family:"JetBrains Mono",monospace;
+    font-size:13px;
+    letter-spacing:0.08em;
+    text-transform: uppercase;
+    color:var(--ink);
+    display:flex;
+    flex-direction:column;
+    gap:4px;
+  }
+  .vital-name small{
+    font-size:11.5px;
+    letter-spacing:0.04em;
+    text-transform: none;
+    color:var(--ink-soft);
+    font-weight:400;
+  }
+  .meter{
+    width:100%;
+    height:6px;
+    background:var(--accent-soft);
+    border-radius:6px;
+    overflow:hidden;
+  }
+  .meter-fill{
+    height:100%;
+    width:0;
+    background:var(--accent);
+    border-radius:6px;
+    transition: width 1s ease;
+  }
+
+  /* ---------- exhibit (desktop screenshot) ---------- */
+  .exhibit{
+    border:1px solid var(--line);
+    background:var(--panel);
+    padding:14px;
+    border-radius:var(--radius);
+    position: relative;
+  }
+  .exhibit img{
+    width:100%;
+    height:auto;
+    display:block;
+    border-radius:calc(var(--radius) - 4px);
+  }
+  .exhibit .caption{
+    margin-top:10px;
+    font-family:"JetBrains Mono",monospace;
+    font-size:11.5px;
+    color:var(--ink-faint);
+  }
+
+  /* ---------- footer ---------- */
+  footer{
+    padding:56px 0 44px;
+  }
+  .socials{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:18px;
+    flex-wrap:wrap;
+  }
+  .btn-light{
+    background:var(--bg); color:var(--ink); border-radius:30px; padding:13px 24px;
+    font-weight:600; font-size:14px; text-decoration:none; display:inline-flex; align-items:center; gap:8px;
+    border:1px solid var(--line);
+    transition:transform .15s ease, box-shadow .2s ease, background .2s ease;
+    cursor:pointer;
+  }
+  .btn-light:hover{ transform:translateY(-2px); box-shadow:0 8px 16px -8px rgba(0,0,0,.2); }
+  .btn-light:active{ transform:translateY(1px) scale(0.98); box-shadow:0 2px 8px -6px rgba(0,0,0,.3); }
+  .filed{
+    text-align:center;
+    font-size:13px;
+    color:var(--ink-faint);
+  }
+
+  .reveal{ opacity:0; transform:translateY(16px); animation:rise .7s ease forwards; }
+  @keyframes rise{ to{ opacity:1; transform:translateY(0); } }
+  @media (prefers-reduced-motion:reduce){ .reveal{ animation:none; opacity:1; transform:none; } html{scroll-behavior:auto;} }
+
+  @media (max-width:700px){
+    .vitals-grid{ grid-template-columns: 1fr; gap:22px; }
+    .photo-block{ flex-direction:column-reverse; gap:22px; }
+    .polaroid{ align-self:center; transform:rotate(-2deg); }
+    .discord-card, .now-playing-card{ min-width: 0; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <div class="brand"><span class="brand-dot">e</span> erebos</div>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="details.html" class="active">Details</a>
+    </nav>
+    <div class="nav-right" style="position:relative;">
+      <!-- Decorative curved arrow pointing to Home button -->
+      <svg width="52" height="42" viewBox="0 0 52 42" fill="none" style="position:absolute; top:44px; right:22px; pointer-events:none; z-index:10; opacity:0.8;">
+        <path d="M8 36C20 36 38 30 42 12" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 3"/>
+        <path d="M35 15L42 10L45 18" stroke="var(--ink)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <a class="btn-dark" href="index.html">Home</a>
+    </div>
+  </header>
+</div>
+
+<div class="wrap">
+  <section class="details-hero reveal" style="border-top:none;">
+    <p class="eyebrow">Important Notes</p>
+    <h1>DETAILS</h1>
+    <div class="photo-block">
+      <div class="bio-col">
+        <p class="lede">
+          This document contains important details about the user — hardware specs, desktop setup, and current status.
+        </p>
+      </div>
+      <div class="polaroid">
+        <img src="https://cx051.github.io/assets/pfp.png" alt="Profile Photo">
+        <p class="caption">user photo</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="reveal">
+    <div class="section-head">
+      <span class="idx">00</span>
+      <h2>Status</h2>
+      <p>Current activity and presence.</p>
+    </div>
+    <div class="status-cards">
+      <div class="discord-card">
+        <img
+          src="https://lanyard.cnrad.dev/api/1525522204530573523?theme=dark&animated=true&showDisplayName=true&hideTimestamp=false"
+          alt="Discord Rich Presence">
+      </div>
+      <div id="now-playing"></div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="reveal">
+    <div class="section-head">
+      <span class="idx">01</span>
+      <h2>PC Specs</h2>
+      <p>The machine behind the terminal.</p>
+    </div>
+    <div class="vitals-grid">
+      <div class="vital">
+        <span class="vital-name">CPU<small>Intel® Pentium® G640 × 2, Sandy Bridge 2011</small></span>
+        <div class="meter"><div class="meter-fill" data-w="12"></div></div>
+      </div>
+      <div class="vital">
+        <span class="vital-name">GPU<small>Intel® HD Graphics 2000 (SNB GT1)</small></span>
+        <div class="meter"><div class="meter-fill" data-w="5"></div></div>
+      </div>
+      <div class="vital">
+        <span class="vital-name">RAM<small>4.0 GiB DDR3</small></span>
+        <div class="meter"><div class="meter-fill" data-w="18"></div></div>
+      </div>
+      <div class="vital">
+        <span class="vital-name">Storage<small>500 GB HDD</small></span>
+        <div class="meter"><div class="meter-fill" data-w="22"></div></div>
+      </div>
+      <div class="vital">
+        <span class="vital-name">Motherboard<small>INTEL Corporation H61</small></span>
+        <div class="meter"><div class="meter-fill" data-w="20"></div></div>
+      </div>
+      <div class="vital">
+        <span class="vital-name">OS<small>Zorin OS 18.1 Core</small></span>
+        <div class="meter"><div class="meter-fill" data-w="90"></div></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <section class="reveal">
+    <div class="section-head">
+      <span class="idx">02</span>
+      <h2>Desktop</h2>
+      <p>Where the magic happens.</p>
+    </div>
+    <div class="exhibit">
+      <img src="https://cx051.github.io/assets/desktop.png" alt="Desktop Screenshot">
+      <p class="caption">Ideal setup</p>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+  <footer class="reveal">
+    <div class="socials">
+      <a class="btn-light" href="https://github.com/cx051" target="_blank" rel="noopener">GitHub ↗</a>
+      <a class="btn-light" href="https://instagram.com/cx051__" target="_blank" rel="noopener">Instagram ↗</a>
+    </div>
+    <p class="filed">Filed somewhere between anatomy textbooks, terminal windows, and unfinished ideas.</p>
+  </footer>
+</div>
+
+<script>
+// animate meters in once on load
+window.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.meter-fill').forEach((el,i)=>{
+    const w=el.getAttribute('data-w');
+    setTimeout(()=>{el.style.width=w+'%';},250+i*90);
+  });
+});
+
+const LASTFM_USER = "cx051";
+const LASTFM_API_KEY = "f74e91654578aef251323d48f4e67901";
+const FALLBACK_ART = "https://lastfm.freetls.fastly.net/i/u/300x300/2a96cbd8b46e442fc41c2b86b821562f.png";
+
+function getAlbumArt(imageArray) {
+  const order = ["extralarge", "large", "medium", "small"];
+  for (const size of order) {
+    const img = imageArray.find(i => i.size === size);
+    if (img && img["#text"] && img["#text"].trim() !== "") {
+      return img["#text"];
+    }
+  }
+  return FALLBACK_ART;
+}
+
+function timeAgo(unixSeconds) {
+  const diffMs = Date.now() - unixSeconds * 1000;
+  const mins = Math.floor(diffMs / 60000);
+  if (mins < 1) return "just now";
+  if (mins < 60) return `${mins}m ago`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `${hours}h ago`;
+  const days = Math.floor(hours / 24);
+  return `${days}d ago`;
+}
+
+async function fetchNowPlaying() {
+  const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
+
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+    const track = data.recenttracks.track[0];
+    const el = document.getElementById("now-playing");
+
+    if (!track) {
+      el.innerHTML = "";
+      return;
+    }
+
+    const isPlaying = track["@attr"]?.nowplaying === "true";
+    const title = track.name;
+    const artist = track.artist["#text"];
+    const albumArt = getAlbumArt(track.image);
+
+    const lastPlayedText = track.date
+      ? `Played ${timeAgo(track.date.uts)}`
+      : "Last played";
+
+    const statusLabel = isPlaying
+      ? '<span class="now-playing-dot"></span> Listening now'
+      : `<span class="now-playing-dot paused"></span> ${lastPlayedText}`;
+
+    el.innerHTML = `
+      <div class="now-playing-card">
+        <img src="${albumArt}" alt="${title}" onerror="this.src='${FALLBACK_ART}'">
+        <div style="min-width:0; flex:1;">
+          <div class="now-playing-status">${statusLabel}</div>
+          <p class="now-playing-title">${title}</p>
+          <p class="now-playing-artist">${artist}</p>
+        </div>
+      </div>
+    `;
+  } catch (err) {
+    console.error("Last.fm fetch failed:", err);
+  }
+}
+
+fetchNowPlaying();
+setInterval(fetchNowPlaying, 15000);
+</script>
+</body>
+</html>
